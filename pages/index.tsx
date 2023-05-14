@@ -1,16 +1,24 @@
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useAccount, useConnect, useDisconnect, useWalletClient } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
+import { Database } from '@tableland/sdk'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { address, isConnected } = useAccount()
+  const { data: walletClient } = useWalletClient()
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   })
   const { disconnect } = useDisconnect()
+
+  // const accessDB = async () => {
+  //   if (walletClient) {
+  //     const db = new Database({ signer: walletClient })
+  //   }
+  // }
 
   if (isConnected)
     return (

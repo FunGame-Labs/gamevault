@@ -2,6 +2,12 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { WagmiConfig, createConfig, mainnet } from 'wagmi'
 import { createPublicClient, http } from 'viem'
+import { Polybase } from '@polybase/client'
+import { PolybaseProvider } from '@polybase/react'
+
+const polybase = new Polybase({
+  defaultNamespace: 'gamevault-v1',
+})
 
 const config = createConfig({
   autoConnect: true,
@@ -13,8 +19,10 @@ const config = createConfig({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig config={config}>
-      <Component {...pageProps} />
-    </WagmiConfig>
+    <PolybaseProvider polybase={polybase}>
+      <WagmiConfig config={config}>
+        <Component {...pageProps} />
+      </WagmiConfig>
+    </PolybaseProvider>
   )
 }
