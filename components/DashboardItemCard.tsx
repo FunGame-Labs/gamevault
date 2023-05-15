@@ -29,7 +29,7 @@ export function DashboardItemCard({
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardDescription className="truncate">{description}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="relative h-56 w-full overflow-hidden rounded-lg">

@@ -32,6 +32,8 @@ export function useDB() {
     address ? polybase.collection('File').where('owner', '==', address) : null
   )
 
+  const allAssets = useCollection<FileData>(address ? polybase.collection('File') : null)
+
   const saveFile = async (props: Omit<FileData, 'owner' | 'id' | 'date'>) => {
     const { title, description, file } = props
     const id = nanoid(16)
@@ -50,6 +52,7 @@ export function useDB() {
   }
 
   return {
+    allAssets: (allAssets.data && allAssets.data.data) || undefined,
     myFiles: (myFiles.data && myFiles.data.data) || undefined,
     saveFile,
   }
