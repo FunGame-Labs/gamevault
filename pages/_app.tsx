@@ -7,7 +7,8 @@ import { createPublicClient, http } from 'viem'
 import { WagmiConfig, createConfig, mainnet } from 'wagmi'
 
 const polybase = new Polybase({
-  defaultNamespace: 'gamevault-v1',
+  defaultNamespace:
+    'pk/0xa6ca155c486fde1b93ec326c8d6d625a24cea697027449ea8a51dad1752e26998fd99b0ff13d7d3078fe5154a819868d171a2317f121b7328e7d15ca674ae3b3/dataverse',
 })
 
 const config = createConfig({
