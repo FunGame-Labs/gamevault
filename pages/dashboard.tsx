@@ -1,11 +1,7 @@
+import { CreateAssetModal } from '@/components/CreateAssetModal'
 import { ItemCard } from '@/components/ItemCard'
 import { Navbar } from '@/components/Navbar'
-import { Inter } from 'next/font/google'
 import Head from 'next/head'
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -28,6 +24,7 @@ export default function Home() {
           <div className="text-lg font-semibold">
             Build your game with the best AI generated game assets
           </div>
+          <CreateAssetModal />
 
           <div className="flex w-full flex-row justify-between pt-20">
             <ItemCard />

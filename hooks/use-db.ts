@@ -1,4 +1,4 @@
-import { useCollection, usePolybase } from '@polybase/react'
+import { useCollection, usePolybase, useRecord } from '@polybase/react'
 
 import { nanoid } from 'nanoid'
 import toast from 'react-hot-toast'
@@ -11,6 +11,14 @@ export interface FileData {
   date: string
   file: string
   owner: string
+}
+
+export const useFileDetail = (id: string | string[] | undefined) => {
+  const polybase = usePolybase()
+  const eventDetail = useRecord<FileData>(
+    typeof id === 'string' ? polybase.collection('File').record(id) : null
+  )
+  return eventDetail
 }
 
 export function useDB() {

@@ -1,14 +1,29 @@
 import { Navbar } from '@/components/Navbar'
 import { Button } from '@/components/ui/button'
+import { useFileDetail } from '@/hooks/use-db'
+import { gameVaultABI } from '@/utils/abi'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
+import { useState } from 'react'
+import { parseEther } from 'viem'
+import { useAccount, useContractWrite } from 'wagmi'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const file = useFileDetail('129fDFMcUOzvbdrT')
+  const { address, isConnected } = useAccount()
+  const [isBought, setIsBought] = useState(false)
+
+  const { writeAsync } = useContractWrite({
+    address: '0xb365B7E549D2c080EA91BA8f46b8eb64067f494c',
+    abi: gameVaultABI,
+    functionName: 'buyAsset',
+    args: [file.data?.data.owner as `0x${string}`, address as `0x${string}`],
+    value: parseEther('0.01'),
+  })
+
   return (
     <>
       <Head>
@@ -36,18 +51,26 @@ export default function Home() {
                 className="object-cover"
               />
             </div>
-            <div className="flex w-full flex-col items-start gap-2 p-4">
-              <div>23$</div>
-              <div>by Owner</div>
-              <div>
-                Excepteur voluptate eiusmod fugiat aute fugiat nisi adipisicing esse
-                eiusmod anim consequat dolore do. Ad id cupidatat voluptate dolor est
-                adipisicing enim proident pariatur veniam cillum enim dolore irure tempor.
-                Mollit eu magna ullamco esse ut incididunt commodo nisi aliquip excepteur
-                ullamco commodo do. Lorem aliqua excepteur qui velit.
+            {file.data && (
+              <div className="flex w-full flex-col items-start gap-2 p-4">
+                <div>23$</div>
+                <div>{file.data.data.owner}</div>
+                <div>{file.data.data.description}</div>
+                <div>{new Date(parseInt(file.data.data.date)).toLocaleDateString()}</div>
+                {isBought ? (
+                  <a href={file.data.data.file}>Open Asset</a>
+                ) : (
+                  <Button
+                    onClick={async () => {
+                      await writeAsync()!
+                      setIsBought(true)
+                    }}
+                  >
+                    Buy Asset
+                  </Button>
+                )}
               </div>
-              <Button>Buy Asset</Button>
-            </div>
+            )}
           </div>
         </div>
       </main>
