@@ -8,35 +8,9 @@ export interface FileData {
   id: string
   title: string
   description: string
-  signedMessage: string
-  hash: string
+  date: string
+  file: string
   owner: string
-  users: string[]
-}
-
-export function useDBByAddress(address: string) {
-  const polybase = usePolybase()
-
-  /**
-   * File
-   */
-  const myFiles = useCollection<FileData>(
-    address ? polybase.collection('File').where('owner', '==', address) : null
-  )
-  const saveFile = async (props: Omit<FileData, 'id'>) => {
-    const { title, description, signedMessage, hash, owner } = props
-    const id = nanoid(16)
-
-    if (!address) {
-      toast.error('Please sign in first.')
-      return
-    }
-
-    const res = await polybase
-      .collection('File')
-      .create([id, title, description, signedMessage, hash, owner])
-    return res
-  }
 }
 
 export function useDB() {
@@ -51,8 +25,10 @@ export function useDB() {
   )
 
   const saveFile = async (props: Omit<FileData, 'id'>) => {
-    const { title, description, signedMessage, hash, owner } = props
+    const { title, description, file } = props
     const id = nanoid(16)
+    const date = String(Date.now())
+    const owner = address as `0x${string}`
 
     if (!address) {
       toast.error('Please sign in first.')
@@ -61,7 +37,7 @@ export function useDB() {
 
     const res = await polybase
       .collection('File')
-      .create([id, title, description, signedMessage, hash, owner])
+      .create([id, title, description, date, file, owner])
     return res
   }
 

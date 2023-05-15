@@ -7,7 +7,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { address, isConnected } = useAccount()
-  const { data: walletClient } = useWalletClient()
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   })

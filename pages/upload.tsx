@@ -1,6 +1,8 @@
+import { useDB } from '@/hooks/use-db'
 import { upload } from '@spheron/browser-upload'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
+import { useAccount } from 'wagmi'
 
 type FormValues = {
   name: string
@@ -9,6 +11,10 @@ type FormValues = {
 }
 
 export default function Home() {
+  const { address, isConnected } = useAccount()
+  const { myFiles, saveFile } = useDB()
+  console.log('🚀 ~ file: upload.tsx:16 ~ Home ~ myFiles:', myFiles)
+
   const { register, handleSubmit } = useForm<FormValues>()
 
   const uploadFile = async (files: File[]) => {
@@ -59,6 +65,13 @@ export default function Home() {
           <input type="file" id="files" {...register('files')} />
           <input type="submit" />
         </form>
+
+        <h2 className="mb-4 text-lg font-medium text-gray-800">Portfolio</h2>
+        <div className="grid grid-cols-3 gap-4">
+          {/* {myFiles?.map((file) => (
+            <FileGridItem fileData={file.data} />
+          ))} */}
+        </div>
       </main>
     </>
   )
