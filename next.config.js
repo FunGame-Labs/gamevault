@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production'
 const spheronConfig = isProd
   ? {
       images: {
@@ -8,10 +8,18 @@ const spheronConfig = isProd
       },
       trailingSlash: true,
     }
-  : {};
+  : {}
 const nextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: '/api/token',
+        destination: 'https://dataverse-be.vercel.app/api/token',
+      },
+    ]
+  },
   ...spheronConfig,
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

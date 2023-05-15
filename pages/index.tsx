@@ -2,7 +2,6 @@ import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import { useAccount, useConnect, useDisconnect, useWalletClient } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
-import { Database } from '@tableland/sdk'
 
 const inter = Inter({ subsets: ['latin'] })
 
