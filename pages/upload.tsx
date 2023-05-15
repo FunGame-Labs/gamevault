@@ -2,7 +2,8 @@ import { useDB } from '@/hooks/use-db'
 import { upload } from '@spheron/browser-upload'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
-import { useAccount } from 'wagmi'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 type FormValues = {
   name: string
@@ -10,8 +11,35 @@ type FormValues = {
   files: FileList
 }
 
+type CardData = {
+  title: string
+  description: string
+  imageUrl: string
+  date: string
+}
+
+const Card = ({ title, description, imageUrl, date }: CardData) => {
+  return (
+    <div className="card">
+      <div className="card-content">
+        <h2 className="card-title">{title}</h2>
+        <p className="card-description">{description}</p>
+        <p className="card-date">{new Date(parseInt(date)).toLocaleDateString()}</p>
+        <a href={imageUrl}>Open Asset</a>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
+  // Wagmi Connection
   const { address, isConnected } = useAccount()
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  })
+  const { disconnect } = useDisconnect()
+
+  // DB
   const { myFiles, saveFile } = useDB()
   console.log('🚀 ~ file: upload.tsx:16 ~ Home ~ myFiles:', myFiles)
 
@@ -38,14 +66,49 @@ export default function Home() {
       protocolLink,
       dynamicLinks
     )
+    return protocolLink
   }
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     console.log('🚀 ~ file: upload.tsx:31 ~ onSubmit ~ data:', data)
     const fileListArray = Array.from(data.files)
 
-    uploadFile(fileListArray)
+    const link = await uploadFile(fileListArray)
+    await saveFile({ title: data.name, description: data.description, file: link })
   }
+
+  if (isConnected)
+    return (
+      <div>
+        Connected to {address}
+        <button onClick={() => disconnect()}>Disconnect</button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="name">Name</label>
+          <input defaultValue="test" {...register('name')} />
+
+          <label htmlFor="description">Description</label>
+          <input defaultValue="test" {...register('description')} />
+
+          <label htmlFor="files">File</label>
+          <input type="file" id="files" {...register('files')} />
+          <input type="submit" />
+        </form>
+        <h2 className="mb-4 text-lg font-medium text-gray-800">Assets</h2>
+        <div className="grid grid-cols-3 gap-4">
+          {myFiles?.map((file) => {
+            return (
+              <Card
+                key={file.data.id}
+                title={file.data.title}
+                description={file.data.description}
+                imageUrl={file.data.file}
+                date={file.data.date}
+              />
+            )
+          })}
+        </div>
+      </div>
+    )
 
   return (
     <>
@@ -56,22 +119,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <button onClick={() => connect()}>Connect Wallet</button>
         <p>Hello World</p>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="name">Name</label>
-          <input defaultValue="test" {...register('name')} />
-
-          <label htmlFor="files">File</label>
-          <input type="file" id="files" {...register('files')} />
-          <input type="submit" />
-        </form>
-
-        <h2 className="mb-4 text-lg font-medium text-gray-800">Portfolio</h2>
-        <div className="grid grid-cols-3 gap-4">
-          {/* {myFiles?.map((file) => (
-            <FileGridItem fileData={file.data} />
-          ))} */}
-        </div>
       </main>
     </>
   )

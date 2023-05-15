@@ -24,7 +24,7 @@ export function useDB() {
     address ? polybase.collection('File').where('owner', '==', address) : null
   )
 
-  const saveFile = async (props: Omit<FileData, 'id'>) => {
+  const saveFile = async (props: Omit<FileData, 'owner' | 'id' | 'date'>) => {
     const { title, description, file } = props
     const id = nanoid(16)
     const date = String(Date.now())
