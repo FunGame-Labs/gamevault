@@ -11,10 +11,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export function ItemCard({
+  id,
   title,
   description,
   imageUrl,
 }: {
+  id: string
   title: string
   description: string
   imageUrl: string
@@ -33,7 +35,7 @@ export function ItemCard({
       <CardFooter className="flex justify-between">
         {/* <Button variant="ghost"></Button> */}
         <div>0.01 ETH</div>
-        <Link href={'details'}>
+        <Link href={`details?id=${id}`}>
           <Button>Buy Asset</Button>
         </Link>
       </CardFooter>

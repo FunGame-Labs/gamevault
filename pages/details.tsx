@@ -5,6 +5,7 @@ import { gameVaultABI } from '@/utils/abi'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { parseEther } from 'viem'
 import { useAccount, useContractWrite } from 'wagmi'
@@ -12,7 +13,10 @@ import { useAccount, useContractWrite } from 'wagmi'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const file = useFileDetail('129fDFMcUOzvbdrT')
+  const router = useRouter()
+  const { id } = router.query
+
+  const file = useFileDetail(id)
   const { address, isConnected } = useAccount()
   const [isBought, setIsBought] = useState(false)
 

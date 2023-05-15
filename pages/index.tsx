@@ -33,6 +33,7 @@ export default function Home() {
           <div className="flex w-full flex-row justify-between pt-20">
             {/* {allAssets && allAssets.map((asset) => <ItemCard key={asset.data.id} />)} */}
             <ItemCard
+              id="129fDFMcUOzvbdrT"
               title="Gold Weapon Set"
               description=""
               imageUrl={
@@ -40,6 +41,7 @@ export default function Home() {
               }
             />
             <ItemCard
+              id="129fDFMcUOzvbdrT"
               title="Knight Starter"
               description=""
               imageUrl={
@@ -47,6 +49,7 @@ export default function Home() {
               }
             />
             <ItemCard
+              id="129fDFMcUOzvbdrT"
               title="Wizard Stones"
               description=""
               imageUrl={
