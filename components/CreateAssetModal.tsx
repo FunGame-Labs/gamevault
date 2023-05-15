@@ -65,7 +65,7 @@ export function CreateAssetModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Create Asset</Button>
+        <Button variant="outline">Upload Asset</Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[425px]">

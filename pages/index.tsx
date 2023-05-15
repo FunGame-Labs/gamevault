@@ -31,7 +31,9 @@ export default function Home() {
           </div>
 
           <div className="flex w-full flex-row justify-between pt-20">
-            {allAssets && allAssets.map((asset) => <ItemCard key={asset.data.id} />)}
+            {/* {allAssets && allAssets.map((asset) => <ItemCard key={asset.data.id} />)} */}
+            <ItemCard />
+            <ItemCard />
           </div>
         </div>
       </main>

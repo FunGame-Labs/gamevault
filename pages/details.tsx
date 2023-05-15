@@ -58,7 +58,12 @@ export default function Home() {
                 <div>{file.data.data.description}</div>
                 <div>{new Date(parseInt(file.data.data.date)).toLocaleDateString()}</div>
                 {isBought ? (
-                  <a href={file.data.data.file}>Open Asset</a>
+                  <a
+                    href={file.data.data.file}
+                    className="rounded-lg border px-4 py-2 hover:bg-slate-100"
+                  >
+                    Open Asset
+                  </a>
                 ) : (
                   <Button
                     onClick={async () => {

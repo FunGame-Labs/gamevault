@@ -48,7 +48,7 @@ export function DashboardItemCard({
         <Link href={'details'}>
           <Button>Buy Asset</Button>
         </Link> */}
-        <a href={imageUrl}>Open Asset</a>
+        <a href={imageUrl} className='rounded-lg border px-4 py-2 hover:bg-slate-100'>Open Asset</a>
       </CardFooter>
     </Card>
   )
