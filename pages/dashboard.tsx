@@ -1,9 +1,13 @@
 import { CreateAssetModal } from '@/components/CreateAssetModal'
+import { DashboardItemCard } from '@/components/DashboardItemCard'
 import { ItemCard } from '@/components/ItemCard'
 import { Navbar } from '@/components/Navbar'
+import { useDB } from '@/hooks/use-db'
 import Head from 'next/head'
 
 export default function Home() {
+  const { myFiles, saveFile } = useDB()
+
   return (
     <>
       <Head>
@@ -27,9 +31,18 @@ export default function Home() {
           <CreateAssetModal />
 
           <div className="flex w-full flex-row justify-between pt-20">
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
+            {myFiles?.map((file) => {
+              return (
+                <DashboardItemCard
+                  key={file.data.id}
+                  title={file.data.title}
+                  description={file.data.description}
+                  imageUrl={file.data.file}
+                  date={file.data.date}
+                  author={file.data.owner}
+                />
+              )
+            })}
           </div>
         </div>
       </main>
