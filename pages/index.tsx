@@ -1,31 +1,9 @@
-import { Inter } from 'next/font/google'
+import { CreateAssetModal } from '@/components/CreateAssetModal'
+import { ItemCard } from '@/components/ItemCard'
+import { Navbar } from '@/components/Navbar'
 import Head from 'next/head'
-import { useAccount, useConnect, useDisconnect, useWalletClient } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  })
-  const { disconnect } = useDisconnect()
-
-  // const accessDB = async () => {
-  //   if (walletClient) {
-  //     const db = new Database({ signer: walletClient })
-  //   }
-  // }
-
-  if (isConnected)
-    return (
-      <div>
-        Connected to {address}
-        <button onClick={() => disconnect()}>Disconnect</button>
-      </div>
-    )
-
   return (
     <>
       <Head>
@@ -34,9 +12,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <p>Hello World</p>
-        <button onClick={() => connect()}>Connect Wallet</button>
+      <main className="flex w-full flex-col">
+        {/* Nav bar */}
+        <Navbar />
+
+        {/* Home content */}
+        <div className="container flex min-h-[calc(100vh-264px)] w-full flex-col items-center justify-center gap-4">
+          <h1 className="scroll-m-20 p-8 text-4xl font-extrabold tracking-tight lg:text-5xl">
+            Best Game assets always available
+          </h1>
+          <div className="text-lg font-semibold">
+            Build your game with the best AI generated game assets
+          </div>
+          <CreateAssetModal />
+
+          <div className="flex w-full flex-row justify-between pt-20">
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+          </div>
+        </div>
       </main>
     </>
   )

@@ -1,8 +1,16 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 export function Navbar() {
+  const { address, isConnected } = useAccount()
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  })
+  const { disconnect } = useDisconnect()
+
   return (
     <div className="flex w-full flex-row items-center justify-between border px-6 py-4">
       <div className="flex w-full flex-row gap-2">
@@ -24,7 +32,11 @@ export function Navbar() {
           Dashboard
         </Link>
       </div>
-      <Button>Connect</Button>
+      {isConnected ? (
+        <Button variant={'secondary'} onClick={() => disconnect()}>Disconnect</Button>
+      ) : (
+        <Button onClick={() => connect()}>Connect</Button>
+      )}
     </div>
   )
 }

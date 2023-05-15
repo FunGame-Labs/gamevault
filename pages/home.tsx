@@ -8,26 +8,6 @@ import { InjectedConnector } from 'wagmi/connectors/injected'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  })
-  const { disconnect } = useDisconnect()
-
-  // const accessDB = async () => {
-  //   if (walletClient) {
-  //     const db = new Database({ signer: walletClient })
-  //   }
-  // }
-
-  if (isConnected)
-    return (
-      <div>
-        Connected to {address}
-        <button onClick={() => disconnect()}>Disconnect</button>
-      </div>
-    )
-
   return (
     <>
       <Head>

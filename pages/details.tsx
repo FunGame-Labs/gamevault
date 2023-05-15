@@ -1,36 +1,14 @@
-import { ItemCard } from '@/components/ItemCard'
 import { Navbar } from '@/components/Navbar'
 import { Button } from '@/components/ui/button'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  })
-  const { disconnect } = useDisconnect()
-
-  // const accessDB = async () => {
-  //   if (walletClient) {
-  //     const db = new Database({ signer: walletClient })
-  //   }
-  // }
-
-  if (isConnected)
-    return (
-      <div>
-        Connected to {address}
-        <button onClick={() => disconnect()}>Disconnect</button>
-      </div>
-    )
-
   return (
     <>
       <Head>
