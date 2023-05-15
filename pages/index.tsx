@@ -32,8 +32,27 @@ export default function Home() {
 
           <div className="flex w-full flex-row justify-between pt-20">
             {/* {allAssets && allAssets.map((asset) => <ItemCard key={asset.data.id} />)} */}
-            <ItemCard />
-            <ItemCard />
+            <ItemCard
+              title="Gold Weapon Set"
+              description=""
+              imageUrl={
+                'https://image.lexica.art/full_jpg/36e1292c-51e1-421d-adde-edda1b22af4c'
+              }
+            />
+            <ItemCard
+              title="Knight Starter"
+              description=""
+              imageUrl={
+                'https://image.lexica.art/full_jpg/029dd30f-b197-4592-854e-61b04fe18ec9'
+              }
+            />
+            <ItemCard
+              title="Wizard Stones"
+              description=""
+              imageUrl={
+                'https://image.lexica.art/full_jpg/c3a5f46a-e2f7-45c8-87e6-4a13d8563588'
+              }
+            />
           </div>
         </div>
       </main>
