@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
 import { createPublicClient, http } from 'viem'
 import { WagmiConfig, createConfig, mainnet } from 'wagmi'
+import { filecoinHyperspace } from 'wagmi/chains'
 
 const polybase = new Polybase({
   defaultNamespace:
@@ -14,7 +15,7 @@ const polybase = new Polybase({
 const config = createConfig({
   autoConnect: true,
   publicClient: createPublicClient({
-    chain: mainnet,
+    chain: filecoinHyperspace,
     transport: http(),
   }),
 })

@@ -1,8 +1,11 @@
 import { useDB } from '@/hooks/use-db'
+import { gameVaultABI } from '@/utils/abi'
 import { upload } from '@spheron/browser-upload'
 import Head from 'next/head'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { parseEther } from 'viem'
+import { useAccount, useConnect, useContractWrite, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
 type FormValues = {
@@ -16,16 +19,39 @@ type CardData = {
   description: string
   imageUrl: string
   date: string
+  author: string
 }
 
-const Card = ({ title, description, imageUrl, date }: CardData) => {
+const Card = ({ title, description, imageUrl, date, author }: CardData) => {
+  const { address, isConnected } = useAccount()
+  const [isBought, setIsBought] = useState(false)
+
+  const { writeAsync } = useContractWrite({
+    address: '0xb365B7E549D2c080EA91BA8f46b8eb64067f494c',
+    abi: gameVaultABI,
+    functionName: 'buyAsset',
+    args: [author as `0x${string}`, address as `0x${string}`],
+    value: parseEther('0.01'),
+  })
+
   return (
     <div className="card">
       <div className="card-content">
         <h2 className="card-title">{title}</h2>
         <p className="card-description">{description}</p>
         <p className="card-date">{new Date(parseInt(date)).toLocaleDateString()}</p>
-        <a href={imageUrl}>Open Asset</a>
+        {isBought ? (
+          <a href={imageUrl}>Open Asset</a>
+        ) : (
+          <button
+            onClick={async () => {
+              await writeAsync()!
+              setIsBought(true)
+            }}
+          >
+            Buy
+          </button>
+        )}
       </div>
     </div>
   )
@@ -103,6 +129,7 @@ export default function Home() {
                 description={file.data.description}
                 imageUrl={file.data.file}
                 date={file.data.date}
+                author={file.data.owner}
               />
             )
           })}
