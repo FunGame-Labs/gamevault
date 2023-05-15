@@ -1,7 +1,10 @@
 import { ItemCard } from '@/components/ItemCard'
 import { Navbar } from '@/components/Navbar'
+import { Button } from '@/components/ui/button'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
@@ -42,17 +45,31 @@ export default function Home() {
 
         {/* Home content */}
         <div className="container flex min-h-[calc(100vh-264px)] w-full flex-col items-center justify-center gap-4">
-          <h1 className="scroll-m-20 p-8 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Best Game assets always available
+          <h1 className="scroll-m-20  p-8 text-4xl font-extrabold tracking-tight lg:text-5xl">
+            Game Title
           </h1>
-          <div className="text-lg font-semibold">
-            Build your game with the best AI generated game assets
-          </div>
 
-          <div className="flex w-full flex-row justify-between pt-20">
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
+          <div className="flex w-full flex-row justify-between gap-6 pt-20">
+            <div className="relative h-56 w-full overflow-hidden rounded-lg p-4">
+              <Image
+                src="https://image.lexica.art/full_jpg/36e1292c-51e1-421d-adde-edda1b22af4c"
+                alt=""
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="flex w-full flex-col items-start gap-2 p-4">
+              <div>23$</div>
+              <div>by Owner</div>
+              <div>
+                Excepteur voluptate eiusmod fugiat aute fugiat nisi adipisicing esse
+                eiusmod anim consequat dolore do. Ad id cupidatat voluptate dolor est
+                adipisicing enim proident pariatur veniam cillum enim dolore irure tempor.
+                Mollit eu magna ullamco esse ut incididunt commodo nisi aliquip excepteur
+                ullamco commodo do. Lorem aliqua excepteur qui velit.
+              </div>
+              <Button>Buy Asset</Button>
+            </div>
           </div>
         </div>
       </main>
