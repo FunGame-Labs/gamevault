@@ -11,6 +11,9 @@ const spheronConfig = isProd
   : {}
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['image.lexica.art'],
+  },
   async rewrites() {
     return [
       {

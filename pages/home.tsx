@@ -66,9 +66,11 @@ export default function Home() {
         {/* Home content */}
         <div className="container flex min-h-[calc(100vh-264px)] w-full flex-col items-center justify-center gap-4">
           <h1 className="scroll-m-20 p-8 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Head title
+            Best Game assets always available
           </h1>
-          <div className="text-lg font-semibold">Are you sure absolutely sure?</div>
+          <div className="text-lg font-semibold">
+            Build your game with the best AI generated game assets
+          </div>
 
           <div className="flex w-full flex-row justify-between pt-20">
             <ItemCard />

@@ -18,41 +18,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import Image from 'next/image'
 
 export function ItemCard() {
   return (
     <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle>Asset title</CardTitle>
+        <CardDescription>Asset description</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Name of your project" />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Framework</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select" />
-                  <SelectContent position="popper">
-                    <SelectItem value="next">Next.js</SelectItem>
-                    <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                    <SelectItem value="astro">Astro</SelectItem>
-                    <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                  </SelectContent>
-                </SelectTrigger>
-              </Select>
-            </div>
-          </div>
-        </form>
+        <div className="relative h-56 w-full overflow-hidden rounded-lg">
+          <Image
+            src="https://image.lexica.art/full_jpg/36e1292c-51e1-421d-adde-edda1b22af4c"
+            alt=""
+            fill
+            className="object-cover"
+          />
+        </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="ghost">Cancel</Button>
-        <Button>Deploy</Button>
+        {/* <Button variant="ghost"></Button> */}
+        <div></div>
+        <Button>Buy Asset</Button>
       </CardFooter>
     </Card>
   )
