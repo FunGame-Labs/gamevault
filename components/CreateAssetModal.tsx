@@ -19,6 +19,7 @@ import { Textarea } from './ui/textarea'
 type FormValues = {
   name: string
   description: string
+  price: string
   files: FileList
 }
 
@@ -57,7 +58,12 @@ export function CreateAssetModal() {
     const fileListArray = Array.from(data.files)
 
     const link = await uploadFile(fileListArray)
-    await saveFile({ title: data.name, description: data.description, file: link })
+    await saveFile({
+      title: data.name,
+      description: data.description,
+      price: data.price,
+      file: link,
+    })
 
     setOpen(false)
   }
@@ -95,6 +101,17 @@ export function CreateAssetModal() {
                 value="a powerful artifact that has been passed down through generations of wizards and sorcerers. This ancient talisman is said to hold within it the secrets of magic and the ability to harness its power."
                 className="col-span-3"
                 {...register('description')}
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="price" className="text-right">
+                Price
+              </Label>
+              <Input
+                id="price"
+                value="0.01"
+                className="col-span-3"
+                {...register('price')}
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">

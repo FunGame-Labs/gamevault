@@ -13,6 +13,7 @@ import Link from 'next/link'
 type CardData = {
   title: string
   description: string
+  price: string
   imageUrl: string
   date: string
   author: string
@@ -34,7 +35,7 @@ export function DashboardItemCard({
       <CardContent>
         <div className="relative h-56 w-full overflow-hidden rounded-lg">
           <Image
-            src="https://image.lexica.art/full_jpg/36e1292c-51e1-421d-adde-edda1b22af4c"
+            src={'https://image.lexica.art/full_jpg/4004339d-549b-4a6f-8fd9-e8a42ead1f1d'}
             alt=""
             fill
             className="object-cover"
@@ -48,7 +49,9 @@ export function DashboardItemCard({
         <Link href={'details'}>
           <Button>Buy Asset</Button>
         </Link> */}
-        <a href={imageUrl} className='rounded-lg border px-4 py-2 hover:bg-slate-100'>Open Asset</a>
+        <a href={imageUrl} className="rounded-lg border px-4 py-2 hover:bg-slate-100">
+          Open Asset
+        </a>
       </CardFooter>
     </Card>
   )

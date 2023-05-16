@@ -6,8 +6,21 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { parseEther } from 'viem'
 import { useAccount, useContractWrite } from 'wagmi'
+
+function shortenEthereumAddress(address: string, length = 8) {
+  if (address.length <= length) {
+    return address // Return the original address if it's already shorter or equal to the desired length
+  } else {
+    const prefixLength = Math.floor((length - 2) / 2)
+    const suffixLength = length - prefixLength - 2
+    const prefix = address.slice(0, prefixLength)
+    const suffix = address.slice(-suffixLength)
+    return prefix + '...' + suffix
+  }
+}
 
 export default function Home() {
   const router = useRouter()
@@ -54,10 +67,18 @@ export default function Home() {
                 />
               </div>
               <div className="flex w-full flex-col items-start gap-2 p-4">
-                <div>23$</div>
-                <div>{file.data.data.owner}</div>
+                <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                  Author
+                </h2>
+                <div>By {shortenEthereumAddress(file.data.data.owner)}</div>
+                <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                  Description
+                </h2>
                 <div>{file.data.data.description}</div>
                 <div>{new Date(parseInt(file.data.data.date)).toLocaleDateString()}</div>
+                <div className="rounded-lg border px-4 py-2 font-bold">
+                  {file.data.data.price ? file.data.data.price : '0.01 ETH'}
+                </div>
                 {isBought ? (
                   <a
                     href={file.data.data.file}
@@ -70,6 +91,10 @@ export default function Home() {
                     onClick={async () => {
                       await writeAsync()!
                       setIsBought(true)
+
+                      toast(
+                        'Congratulations! 🎉 You have successfully acquired a new game asset'
+                      )
                     }}
                   >
                     Buy Asset

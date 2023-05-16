@@ -27,7 +27,7 @@ export default function Home() {
             Best Game assets always available
           </h1>
           <div className="text-lg font-semibold">
-            Build your game with the best AI generated game assets
+            Build your game with the best game assets
           </div>
 
           <div className="flex w-full flex-row justify-between pt-20">

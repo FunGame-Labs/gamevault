@@ -8,6 +8,7 @@ export interface FileData {
   id: string
   title: string
   description: string
+  price: string
   date: string
   file: string
   owner: string
@@ -35,7 +36,7 @@ export function useDB() {
   const allAssets = useCollection<FileData>(address ? polybase.collection('File') : null)
 
   const saveFile = async (props: Omit<FileData, 'owner' | 'id' | 'date'>) => {
-    const { title, description, file } = props
+    const { title, description, file, price } = props
     const id = nanoid(16)
     const date = String(Date.now())
     const owner = address as `0x${string}`
@@ -47,7 +48,7 @@ export function useDB() {
 
     const res = await polybase
       .collection('File')
-      .create([id, title, description, date, file, owner])
+      .create([id, title, description, price, date, file, owner])
     return res
   }
 

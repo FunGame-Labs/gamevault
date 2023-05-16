@@ -29,13 +29,14 @@ export default function Home() {
           </div>
           <CreateAssetModal />
 
-          <div className="flex w-full flex-row justify-between pt-20">
+          <div className="flex w-full flex-row pt-20 gap-4">
             {myFiles?.map((file) => {
               return (
                 <DashboardItemCard
                   key={file.data.id}
                   title={file.data.title}
                   description={file.data.description}
+                  price={file.data.price}
                   imageUrl={file.data.file}
                   date={file.data.date}
                   author={file.data.owner}

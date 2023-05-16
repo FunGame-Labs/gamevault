@@ -14,11 +14,13 @@ export function ItemCard({
   id,
   title,
   description,
+  price,
   imageUrl,
 }: {
   id: string
   title: string
   description: string
+  price: string
   imageUrl: string
 }) {
   return (
