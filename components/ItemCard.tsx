@@ -36,7 +36,7 @@ export function ItemCard({
       </CardContent>
       <CardFooter className="flex justify-between">
         {/* <Button variant="ghost"></Button> */}
-        <div>0.01 ETH</div>
+        <div>{price}</div>
         <Link href={`details?id=${id}`}>
           <Button>Buy Asset</Button>
         </Link>

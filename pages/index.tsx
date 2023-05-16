@@ -36,6 +36,7 @@ export default function Home() {
               id="129fDFMcUOzvbdrT"
               title="Gold Weapon Set"
               description=""
+              price="0.01 ETH"
               imageUrl={
                 'https://image.lexica.art/full_jpg/36e1292c-51e1-421d-adde-edda1b22af4c'
               }
@@ -44,6 +45,7 @@ export default function Home() {
               id="129fDFMcUOzvbdrT"
               title="Knight Starter"
               description=""
+              price="0.01 ETH"
               imageUrl={
                 'https://image.lexica.art/full_jpg/029dd30f-b197-4592-854e-61b04fe18ec9'
               }
@@ -52,6 +54,7 @@ export default function Home() {
               id="129fDFMcUOzvbdrT"
               title="Wizard Stones"
               description=""
+              price="0.01 ETH"
               imageUrl={
                 'https://image.lexica.art/full_jpg/c3a5f46a-e2f7-45c8-87e6-4a13d8563588'
               }
