@@ -33,7 +33,7 @@ export default function Home() {
           <div className="flex w-full flex-row justify-between pt-20">
             {/* {allAssets && allAssets.map((asset) => <ItemCard key={asset.data.id} />)} */}
             <ItemCard
-              id="129fDFMcUOzvbdrT"
+              id="vZgOfhNvwcPl7Fdp"
               title="Gold Weapon Set"
               description=""
               price="0.01 ETH"
@@ -42,7 +42,7 @@ export default function Home() {
               }
             />
             <ItemCard
-              id="129fDFMcUOzvbdrT"
+              id="Y_Hv3bJO4l0Ze2xp"
               title="Knight Starter"
               description=""
               price="0.01 ETH"
@@ -51,7 +51,7 @@ export default function Home() {
               }
             />
             <ItemCard
-              id="129fDFMcUOzvbdrT"
+              id="IlwWF6n3h39Udzxd"
               title="Wizard Stones"
               description=""
               price="0.01 ETH"

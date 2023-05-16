@@ -87,7 +87,7 @@ export function CreateAssetModal() {
               </Label>
               <Input
                 id="name"
-                value="Magic Potions"
+                placeholder="Magic Potions"
                 className="col-span-3"
                 {...register('name')}
               />
@@ -98,7 +98,7 @@ export function CreateAssetModal() {
               </Label>
               <Textarea
                 id="description"
-                value="a powerful artifact that has been passed down through generations of wizards and sorcerers. This ancient talisman is said to hold within it the secrets of magic and the ability to harness its power."
+                placeholder="a powerful artifact that has been passed down through generations of wizards and sorcerers. This ancient talisman is said to hold within it the secrets of magic and the ability to harness its power."
                 className="col-span-3"
                 {...register('description')}
               />
@@ -109,7 +109,7 @@ export function CreateAssetModal() {
               </Label>
               <Input
                 id="price"
-                value="0.01"
+                placeholder="0.01"
                 className="col-span-3"
                 {...register('price')}
               />
@@ -127,7 +127,7 @@ export function CreateAssetModal() {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit">Upload</Button>
           </DialogFooter>
         </form>
       </DialogContent>
